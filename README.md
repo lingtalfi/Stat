@@ -75,6 +75,56 @@ $data = $analyzer->analyze($start, $end, $dir, $extractor);
 a($data);
 ```
  
+The above example code would give you the total (sum of the individual counts) for 
+the given period.
+
+Sometimes however, it's more useful to have one number per day (for instance if you want to display
+one plot per day indicating the number of each day for a given month).
+
+In this case, you can use another cumulating technique, like this:
+
+
+```php
+<?php
+
+use Stat\Analyzer\Cache\PerDayAnalyzerCache;
+use Stat\Analyzer\CumulatorPerDayAnalyzer;
+use Stat\Extractor\CounterExtractor;
+
+require_once __DIR__ . "/../init.php";
+
+
+$analyzer = new CumulatorPerDayAnalyzer();
+$extractor = new CounterExtractor();
+$dir = __DIR__ . '/stats-counter';
+$start = '2015-12-26';
+$end = '2016-12-26';
+$data = $analyzer
+    ->setCache(new PerDayAnalyzerCache('stats-counter-range-cache'))// be sure to create the stats-cache directory first
+    ->analyze($start, $end, $dir, $extractor);
+
+a($data);
+```
+ 
+In the above example we've just used the CumulatorPerDayAnalyzer.
+  
+It gathers the count for all days rather than summing them.
+Therefore, the data that is returned looks like this:
+ 
+```txt
+[
+    2015-12-26 => 60,
+    2015-12-27 => 160,
+    2015-12-28 => 45,
+    ...
+    2016-12-26 => 545,
+]
+``` 
+  
+ 
+ 
+ 
+ 
 The Extractor has an extract method that returns the "flatten" array for a given day.
  
 Note that this technique might work with other units of time (not only per day),
@@ -170,6 +220,28 @@ a($data);
 
 
 
+
+Fake generator
+===================
+2016-12-27
+
+If you want to generate some fake data, you can use the fake generator, like this:
+
+```php
+$gen = new FakeWebGeneratorUtil();
+$gen->generateByPeriod(__DIR__ . '/stats', '2015-12-01', '2016-12-20');
+```
+
+Or if you wish to generate fake counter stats:
+
+
+```php
+$o = new FakeCounterGeneratorUtil();
+$o->generateByPeriod(__DIR__ . "/stats-counter", "2015-12-01", "2016-12-25");
+```
+
+
+
 Credits
 ------------------
 
@@ -177,9 +249,12 @@ In this implementation, for the WebExtractor, I used the https://github.com/cbsc
 
 
 
-
 History Log
 ------------------
+    
+- 1.2.0 -- 2016-12-27
+
+    - add some generator tools
     
 - 1.1.0 -- 2016-12-27
 

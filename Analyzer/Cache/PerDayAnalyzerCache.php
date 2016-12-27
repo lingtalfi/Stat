@@ -4,6 +4,7 @@
 namespace Stat\Analyzer\Cache;
 
 
+use Bat\FileSystemTool;
 use Stat\Analyzer\PerDayAnalyzerHelper;
 
 class PerDayAnalyzerCache implements PerDayAnalyzerCacheInterface
@@ -34,7 +35,7 @@ class PerDayAnalyzerCache implements PerDayAnalyzerCacheInterface
         }
         $data = serialize($data);
         $file = PerDayAnalyzerHelper::getDayPath($this->dir, $day);
-        file_put_contents($file, $data);
+        FileSystemTool::mkfile($file, $data);
     }
 
     public function getDay($day)

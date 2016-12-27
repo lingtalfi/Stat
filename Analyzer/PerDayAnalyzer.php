@@ -58,14 +58,8 @@ class PerDayAnalyzer
                         $data = $extractor->getData($f);
                     }
 
-                    foreach ($data as $k => $v) {
-                        $v = (int)$v;
-                        if (array_key_exists($k, $ret)) {
-                            $ret[$k] += $v;
-                        } else {
-                            $ret[$k] = $v;
-                        }
-                    }
+
+                    $this->combineData($data, $ret, $date);
                 }
 
 
@@ -87,5 +81,20 @@ class PerDayAnalyzer
     {
         $this->_suffix = $suffix;
         return $this;
+    }
+
+    //------------------------------------------------------------------------------/
+    //
+    //------------------------------------------------------------------------------/
+    protected function combineData(array $data, array &$ret, $date)
+    {
+        foreach ($data as $k => $v) {
+            $v = (int)$v;
+            if (array_key_exists($k, $ret)) {
+                $ret[$k] += $v;
+            } else {
+                $ret[$k] = $v;
+            }
+        }
     }
 }

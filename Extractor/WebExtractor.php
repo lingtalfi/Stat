@@ -17,7 +17,7 @@ class WebExtractor implements ExtractorInterface
 
         $this->extractLangs($content, $ret);
 
-        $o = new BrowserUtil($_SERVER['HTTP_USER_AGENT']);
+        $o = new BrowserUtil();
 
 
         if (preg_match_all('!^\+(.*)!mi', $content, $matches)) {
