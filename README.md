@@ -181,6 +181,10 @@ In this implementation, for the WebExtractor, I used the https://github.com/cbsc
 History Log
 ------------------
     
+- 1.1.0 -- 2016-12-27
+
+    - modify the day path for PerDayWebAnalyzer
+    
 - 1.0.0 -- 2016-12-27
 
     - initial commit

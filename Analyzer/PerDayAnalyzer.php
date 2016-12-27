@@ -46,7 +46,7 @@ class PerDayAnalyzer
             DayRangeIterator::iterate($startDay, $endDay, function ($date) use ($dir, $extractor, &$ret) {
 
 
-                $f = $dir . "/" . $date . $this->_suffix . '.txt';
+                $f = PerDayAnalyzerHelper::getDayPath($dir, $date, $this->_suffix);
                 if (file_exists($f)) {
                     if (null !== $this->cache) {
                         $data = $this->cache->getDay($date);

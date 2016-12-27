@@ -4,6 +4,7 @@
 namespace Stat\Analyzer\Cache;
 
 
+use Stat\Analyzer\PerDayAnalyzerHelper;
 
 class PerDayAnalyzerCache implements PerDayAnalyzerCacheInterface
 {
@@ -32,13 +33,13 @@ class PerDayAnalyzerCache implements PerDayAnalyzerCacheInterface
             return false; // don't store the current day
         }
         $data = serialize($data);
-        $file = $this->dir . "/days/" . $day . '.txt';
+        $file = PerDayAnalyzerHelper::getDayPath($this->dir, $day);
         file_put_contents($file, $data);
     }
 
     public function getDay($day)
     {
-        $file = $this->dir . "/days/" . $day . '.txt';
+        $file = PerDayAnalyzerHelper::getDayPath($this->dir, $day);
         if (file_exists($file)) {
             $c = file_get_contents($file);
             return unserialize($c);
