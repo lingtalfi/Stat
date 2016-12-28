@@ -34,7 +34,7 @@ class PerDayAnalyzer
     public function analyze($startDay, $endDay, $dir, ExtractorInterface $extractor)
     {
         $ret = [];
-        if ($endDay > $startDay) {
+        if ($endDay >= $startDay) {
 
             if (null !== $this->cache) {
                 if (false !== ($data = $this->cache->getPeriod($startDay, $endDay))) {

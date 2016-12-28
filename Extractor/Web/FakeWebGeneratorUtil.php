@@ -62,15 +62,15 @@ class FakeWebGeneratorUtil
                 $maxLang = count($langs) - 1;
                 $maxAgent = count($agents) - 1;
 
-                $variance = $this->_maxVariance;
                 $baseNumber = $this->_baseNumber;
 
 
                 DayRangeIterator::iterate($startDay, $endDay, function ($date) use (
                     $dir, $langs, $agents,
-                    $maxAgent, $maxLang, $variance, $baseNumber
+                    $maxAgent, $maxLang, $baseNumber
                 ) {
                     $file = PerDayAnalyzerHelper::getDayPath($dir, $date);
+                    $variance = rand(0, $this->_maxVariance);
 
                     if (0 === rand(0, 1)) {
                         $baseNumber -= $variance;

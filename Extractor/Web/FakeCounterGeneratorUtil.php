@@ -42,14 +42,14 @@ class FakeCounterGeneratorUtil
         if (is_dir($dir)) {
             if ($startDay < $endDay) {
 
-                $variance = $this->_maxVariance;
                 $baseNumber = $this->_baseNumber;
 
 
                 DayRangeIterator::iterate($startDay, $endDay, function ($date) use (
-                    $dir, $variance, $baseNumber
+                    $dir, $baseNumber
                 ) {
                     $file = PerDayAnalyzerHelper::getDayPath($dir, $date);
+                $variance = rand(0, $this->_maxVariance);
 
                     if (0 === rand(0, 1)) {
                         $baseNumber -= $variance;
