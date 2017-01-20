@@ -249,8 +249,18 @@ In this implementation, for the WebExtractor, I used the https://github.com/cbsc
 
 
 
+Dependencies
+----------------
+- [lingtalfi/Bat 1.40.0](https://github.com/lingtalfi/Bat)
+
+
+
 History Log
 ------------------
+    
+- 1.2.1 -- 2017-01-20
+
+    - fix erroneous return in PerDayAnalyzerUtil::getAvailableRange
     
 - 1.2.0 -- 2016-12-27
 

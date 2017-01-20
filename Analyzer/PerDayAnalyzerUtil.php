@@ -80,8 +80,10 @@ class PerDayAnalyzerUtil
             }
         }
         if (null !== $d) {
-            $ret[] = substr($d, 0, -4);
-            return $ret;
+            if ('.' !== $d && '..' !== $d) {
+                $ret[] = substr($d, 0, -4);
+                return $ret;
+            }
         }
         return false;
     }
